@@ -4,29 +4,34 @@
  */
 package assignment_2;
 
-/**
- *
- * @author OEM
- */
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        // Prompt player for their name
         System.out.print("Enter your name: ");
         Player player = new Player(scanner.nextLine());
 
-        List<Question> questions = Arrays.asList(
-                new Question("What is the capital of New Zealand?", new String[]{"A: Auckland", "B: Wellington", "C: Christchurch", "D: Hamilton"}, 'B'),
-            new Question("What is the main ingredient in guacamole?", new String[]{"A: Avocado", "B: Lemon", "C: Tomatoes", "D: Onion"}, 'A')
-            // Add more questions here
-        );
+        // Welcome message
+        System.out.println("Welcome to the Quiz Game, " + player.getName() + "!");
 
-        QuestionBank bank = new QuestionBank(questions);
+        // Load questions from database by difficulty level
+        List<Question> easyQuestions = QuestionLoader.loadByDifficulty(1);
+        List<Question> mediumQuestions = QuestionLoader.loadByDifficulty(2);
+        List<Question> hardQuestions = QuestionLoader.loadByDifficulty(3);
+
+        // Combine all questions into a single bank
+        QuestionBank bank = new QuestionBank();
+        bank.addQuestions(easyQuestions);
+        bank.addQuestions(mediumQuestions);
+        bank.addQuestions(hardQuestions);
+
+        // Start the game
         GameEngine game = new GameEngine(player, bank);
         game.play();
     }
 }
-
