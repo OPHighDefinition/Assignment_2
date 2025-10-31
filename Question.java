@@ -9,25 +9,28 @@ package assignment_2;
  * @author OEM
  */
 public class Question {
-    private String prompt;
-    private String[] options;
-    private char correctAnswer;
 
+    private final String prompt;
+    private final String[] options;
+    private final char correctAnswer;
+
+    // Constructor to initialize question data
     public Question(String prompt, String[] options, char correctAnswer) {
         this.prompt = prompt;
         this.options = options;
         this.correctAnswer = correctAnswer;
     }
 
+    // Display question and options
     public void display(int number) {
         System.out.println("\nQuestion " + number + ": " + prompt);
         for (String option : options) {
             System.out.println(option);
         }
     }
-//Checks if users input is correct
+
+    // Check if user's input matches the correct answer
     public boolean isCorrect(String input) {
         return input.trim().equalsIgnoreCase(String.valueOf(correctAnswer));
     }
 }
-
