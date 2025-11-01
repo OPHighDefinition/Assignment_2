@@ -4,13 +4,13 @@
  */
 package assignment_2;
 
-
 public class MoneyTree {
+
     private final int[] prizes = {100, 500, 1200, 2500, 8000, 32000, 125000, 250000, 500000, 1000000};
     private final int[] milestones = {3, 5, 7}; // Guaranteed levels
 
     public int getPrize(int score) {
-        int index = Math.min(score, prizes.length - 1);
+        int index = Math.max(0, score - 1); // Use score - 1 to get last earned prize
         return prizes[index];
     }
 
@@ -22,10 +22,12 @@ public class MoneyTree {
         }
         return 0;
     }
-
+// Check is user is on a milestone
     public boolean isMilestone(int score) {
         for (int m : milestones) {
-            if (score == m) return true;
+            if (score == m) {
+                return true;
+            }
         }
         return false;
     }
@@ -34,4 +36,3 @@ public class MoneyTree {
         return prizes.length;
     }
 }
-
