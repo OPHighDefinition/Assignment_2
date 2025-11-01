@@ -6,7 +6,7 @@ package assignment_2;
 
 public class MoneyTree {
 
-    private final int[] prizes = {100, 500, 1200, 2500, 8000, 32000, 125000, 250000, 500000, 1000000};
+    private final int[] prizes = {100, 500, 1200, 2500, 8000, 32000, 125000, 250000, 500000, 1000000, 2000000};
     private final int[] milestones = {3, 5, 7}; // Guaranteed levels
 
     public int getPrize(int score) {
@@ -23,6 +23,7 @@ public class MoneyTree {
         return 0;
     }
 // Check is user is on a milestone
+
     public boolean isMilestone(int score) {
         for (int m : milestones) {
             if (score == m) {
