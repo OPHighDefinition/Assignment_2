@@ -23,8 +23,8 @@ public class Question {
 
     // Display question and options
     public void display(int number) {
-        System.out.println("\nQuestion " + number + ": " + prompt);
-        for (String option : options) {
+        System.out.println("\nQuestion " + number + ": " + getPrompt());
+        for (String option : getOptions()) {
             System.out.println(option);
         }
     }
@@ -33,4 +33,20 @@ public class Question {
     public boolean isCorrect(String input) {
         return input.trim().equalsIgnoreCase(String.valueOf(correctAnswer));
     }
+
+    /**
+     * @return the prompt
+     */
+    public String getPrompt() {
+        return prompt;
+    }
+
+    /**
+     * @return the options
+     */
+    public String[] getOptions() {
+        return options;
+    }
+    
+    
 }
