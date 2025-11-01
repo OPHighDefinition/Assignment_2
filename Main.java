@@ -1,37 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package assignment_2;
 
 import java.util.List;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class Main {
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        String name = JOptionPane.showInputDialog("Enter your name:");
+        if (name == null || name.trim().isEmpty()) return;
 
-        // Prompt player for their name
-        System.out.print("Enter your name: ");
-        Player player = new Player(scanner.nextLine());
+        Player player = new Player(name.trim());
 
-        // Welcome message
-        System.out.println("Welcome to the Quiz Game, " + player.getName() + "!");
+        List<Question> easy = QuestionLoader.loadByDifficulty(1);
+        List<Question> medium = QuestionLoader.loadByDifficulty(2);
+        List<Question> hard = QuestionLoader.loadByDifficulty(3);
 
-        // Load questions from database by difficulty level
-        List<Question> easyQuestions = QuestionLoader.loadByDifficulty(1);
-        List<Question> mediumQuestions = QuestionLoader.loadByDifficulty(2);
-        List<Question> hardQuestions = QuestionLoader.loadByDifficulty(3);
-
-        // Combine all questions into a single bank
         QuestionBank bank = new QuestionBank();
-        bank.addQuestions(easyQuestions);
-        bank.addQuestions(mediumQuestions);
-        bank.addQuestions(hardQuestions);
+        bank.addQuestions(easy);
+        bank.addQuestions(medium);
+        bank.addQuestions(hard);
 
-        // Start the game
-        GameEngine game = new GameEngine(player, bank);
-        game.play();
+        SwingUtilities.invokeLater(() -> new QuizGUI(player, bank));
     }
 }
